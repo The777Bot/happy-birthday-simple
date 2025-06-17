@@ -44,6 +44,54 @@ function App() {
     {
       setup: "What do you call a bear with no teeth?",
       punchline: "A gummy bear!"
+    },
+    {
+      setup: "What do you call a dad who's a magician?",
+      punchline: "A dad-ician!"
+    },
+    {
+      setup: "Why did the dad bring a ladder to the bar?",
+      punchline: "Because he heard the drinks were on the house!"
+    },
+    {
+      setup: "What do you call a dad who's a chef?",
+      punchline: "A pop-corn chef!"
+    },
+    {
+      setup: "Why did the dad bring string to the restaurant?",
+      punchline: "In case he needed to tie one on!"
+    },
+    {
+      setup: "What do you call a dad who's a gardener?",
+      punchline: "A pop-ular gardener!"
+    },
+    {
+      setup: "Why did the dad bring a map to the party?",
+      punchline: "Because he wanted to find the way to the punch line!"
+    },
+    {
+      setup: "What do you call a dad who's a musician?",
+      punchline: "A pop-star!"
+    },
+    {
+      setup: "Why did the dad bring a clock to the beach?",
+      punchline: "Because he wanted to watch the time and tide!"
+    },
+    {
+      setup: "What do you call a dad who's a photographer?",
+      punchline: "A pop-shot!"
+    },
+    {
+      setup: "Why did the dad bring a ladder to the library?",
+      punchline: "Because he wanted to reach the high shelves of dad jokes!"
+    },
+    {
+      setup: "What do you call a dad who's a baker?",
+      punchline: "A pop-tart maker!"
+    },
+    {
+      setup: "Why did the dad bring a mirror to the party?",
+      punchline: "Because he wanted to reflect on the good times!"
     }
   ];
 
@@ -134,7 +182,7 @@ function App() {
           </button>
         </div>
 
-        <h1 className="birthday-title">Happy Birthday Dad!</h1>
+        <h1 className="birthday-title">Happy Birthday Baba!</h1>
         
         <div className="cake" onClick={handleWish}>
           🎂
