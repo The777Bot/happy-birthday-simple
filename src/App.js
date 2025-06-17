@@ -8,7 +8,44 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [showFireworks, setShowFireworks] = useState(false);
   const [showPopperConfetti, setShowPopperConfetti] = useState(false);
+  const [currentJoke, setCurrentJoke] = useState('');
+  const [showJoke, setShowJoke] = useState(false);
   const audioRef = useRef(null);
+
+  const jokes = [
+    {
+      setup: "Why don't scientists trust atoms?",
+      punchline: "Because they make up everything!"
+    },
+    {
+      setup: "Why did the scarecrow win an award?",
+      punchline: "Because he was outstanding in his field!"
+    },
+    {
+      setup: "What do you call a fake noodle?",
+      punchline: "An impasta!"
+    },
+    {
+      setup: "How does a penguin build its house?",
+      punchline: "Igloos it together!"
+    },
+    {
+      setup: "Why don't eggs tell jokes?",
+      punchline: "They'd crack each other up!"
+    },
+    {
+      setup: "What do you call a can opener that doesn't work?",
+      punchline: "A can't opener!"
+    },
+    {
+      setup: "Why did the math book look so sad?",
+      punchline: "Because it had too many problems!"
+    },
+    {
+      setup: "What do you call a bear with no teeth?",
+      punchline: "A gummy bear!"
+    }
+  ];
 
   useEffect(() => {
     setTimeout(() => setShowConfetti(true), 1000);
@@ -23,6 +60,14 @@ function App() {
   };
 
   const handlePopper = () => {
+    setShowPopperConfetti(true);
+    setTimeout(() => setShowPopperConfetti(false), 2000);
+  };
+
+  const handleJoke = () => {
+    const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+    setCurrentJoke(randomJoke);
+    setShowJoke(true);
     setShowPopperConfetti(true);
     setTimeout(() => setShowPopperConfetti(false), 2000);
   };
@@ -116,10 +161,23 @@ function App() {
           >
             Pop the Party Popper! 🎊
           </button>
+          <button 
+            className="joke-button"
+            onClick={handleJoke}
+          >
+            Make Me Laugh! 😄
+          </button>
           <div className="wish-counter">
             Wishes sent: {wishCount} ❤️
           </div>
         </div>
+
+        {showJoke && currentJoke && (
+          <div className="joke-container">
+            <div className="joke-setup">{currentJoke.setup}</div>
+            <div className="joke-punchline">{currentJoke.punchline}</div>
+          </div>
+        )}
 
         <div className="floating-elements">
           <span className="floating-item">🎁</span>
