@@ -1,23 +1,147 @@
-import logo from './logo.svg';
+import { useState, useEffect, useRef } from 'react';
 import './App.css';
 
 function App() {
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
+  const [wishCount, setWishCount] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [showFireworks, setShowFireworks] = useState(false);
+  const [showPopperConfetti, setShowPopperConfetti] = useState(false);
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    setTimeout(() => setShowConfetti(true), 1000);
+    setTimeout(() => setShowMessage(true), 2000);
+  }, []);
+
+  const handleWish = () => {
+    setShowConfetti(true);
+    setWishCount(prev => prev + 1);
+    setShowFireworks(true);
+    setTimeout(() => setShowFireworks(false), 2000);
+  };
+
+  const handlePopper = () => {
+    setShowPopperConfetti(true);
+    setTimeout(() => setShowPopperConfetti(false), 2000);
+  };
+
+  const toggleMusic = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <audio ref={audioRef} src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop />
+      
+      {showConfetti && <div className="confetti-container">
+        {[...Array(50)].map((_, i) => (
+          <div key={i} className="confetti" style={{
+            left: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 3}s`,
+            backgroundColor: `hsl(${Math.random() * 360}, 100%, 50%)`
+          }} />
+        ))}
+      </div>}
+
+      {showPopperConfetti && (
+        <div className="popper-container">
+          <div className="popper-burst">
+            {[...Array(60)].map((_, i) => (
+              <div 
+                key={i} 
+                className="streamer"
+                style={{
+                  '--angle': `${Math.random() * 360}deg`,
+                  '--length': `${Math.random() * 200 + 100}px`,
+                  '--delay': `${Math.random() * 0.3}s`,
+                  '--color': `hsl(${Math.random() * 360}, 100%, 50%)`,
+                  '--width': `${Math.random() * 4 + 2}px`
+                }}
+              />
+            ))}
+            <div className="popper-center" />
+          </div>
+        </div>
+      )}
+
+      {showFireworks && <div className="fireworks-container">
+        {[...Array(5)].map((_, i) => (
+          <div key={i} className="firework" style={{
+            left: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 0.5}s`
+          }} />
+        ))}
+      </div>}
+      
+      <div className="birthday-container">
+        <div className="controls">
+          <button className="music-button" onClick={toggleMusic}>
+            {isPlaying ? '🔇' : '🎵'}
+          </button>
+        </div>
+
+        <h1 className="birthday-title">Happy Birthday Dad!</h1>
+        
+        <div className="cake" onClick={handleWish}>
+          🎂
+        </div>
+
+        {showMessage && (
+          <div className="birthday-message">
+            <p>To the most amazing father in the world,</p>
+            <p>Thank you for your love, guidance, and support.</p>
+            <p>Wishing you a day filled with joy and laughter!</p>
+          </div>
+        )}
+
+        <div className="interactive-elements">
+          <button 
+            className="wish-button"
+            onClick={handleWish}
+          >
+            Click for More Wishes! 🎉
+          </button>
+          <button 
+            className="popper-button"
+            onClick={handlePopper}
+          >
+            Pop the Party Popper! 🎊
+          </button>
+          <div className="wish-counter">
+            Wishes sent: {wishCount} ❤️
+          </div>
+        </div>
+
+        <div className="floating-elements">
+          <span className="floating-item">🎁</span>
+          <span className="floating-item">🎈</span>
+          <span className="floating-item">🎊</span>
+          <span className="floating-item">🎉</span>
+        </div>
+
+        <div className="balloons">
+          🎈 🎈 🎈
+        </div>
+
+        <div className="sparkle-container">
+          {[...Array(20)].map((_, i) => (
+            <div key={i} className="sparkle" style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 2}s`
+            }} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
